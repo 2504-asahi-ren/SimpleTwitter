@@ -116,12 +116,12 @@ public class UserService {
 
         Connection connection = null;
         try {
-            // パスワード暗号化
+        	// パスワード暗号化
         	//パスワードがisBlankではないなら暗号化する。
         	if (!StringUtils.isBlank(user.getPassword())){
         		String encPassword = CipherUtil.encrypt(user.getPassword());
         		user.setPassword(encPassword);
-            }
+        	}
             connection = getConnection();
             new UserDao().update(connection, user);
             commit(connection);

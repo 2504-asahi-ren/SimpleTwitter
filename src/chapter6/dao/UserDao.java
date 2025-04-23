@@ -194,13 +194,14 @@ public class UserDao {
 
     	        //Blankでないとき(passwordの変更があるとき)は、4(password),5(Description),6(id)をセット
     	        if (!StringUtils.isBlank(user.getPassword())){
-    	   	        ps.setString(4, user.getPassword());
+    	        	ps.setString(4, user.getPassword());
         	        ps.setString(5, user.getDescription());
         	        ps.setInt(6, user.getId());
-        	      //Blankのとき(passwordの変更がないとき)は、4(Description),5(Id)
+
+        	    //Blankのとき(passwordの変更がないとき)は、4(Description),5(Id)
     	        } else {
-    	    	        ps.setString(4, user.getDescription());
-    	    	        ps.setInt(5, user.getId());
+    	        	ps.setString(4, user.getDescription());
+    	        	ps.setInt(5, user.getId());
     	        }
 
     	        int count = ps.executeUpdate();
