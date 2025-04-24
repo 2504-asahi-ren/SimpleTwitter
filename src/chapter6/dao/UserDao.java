@@ -233,6 +233,7 @@ public class UserDao {
 			close(ps);
 		}
 	}
+
 	/*
 	 * String型のaccountを引数にもつ、selectメソッドを追加する
 	 */
