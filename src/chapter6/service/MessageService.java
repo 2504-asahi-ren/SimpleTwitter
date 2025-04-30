@@ -138,7 +138,7 @@ public class MessageService {
 		}
 	}
 	//EditServletからselectで参照
-	public List<UserMessage> messageSelect(String messageId) {
+	public Message messageSelect(String messageId) {
 
 		log.info(new Object() {
 		}.getClass().getEnclosingClass().getName() +
@@ -163,9 +163,35 @@ public class MessageService {
 			* idがnullだったら全件取得する
 			* idがnull以外だったら、その値に対応するユーザーIDの投稿を取得する
 			*/
-			List<UserMessage> messages = new MessageDao().select(connection, id, LIMIT_NUM);
+			Message messages = new MessageDao().select(connection, id, LIMIT_NUM);
 
 			return messages;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			log.log(Level.SEVERE, new Object() {
+			}.getClass().getEnclosingClass().getName() + " : " + e.toString(), e);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			log.log(Level.SEVERE, new Object() {
+			}.getClass().getEnclosingClass().getName() + " : " + e.toString(), e);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+	public void update(Message message) {
+
+		log.info(new Object() {
+		}.getClass().getEnclosingClass().getName() +
+				" : " + new Object() {
+				}.getClass().getEnclosingMethod().getName());
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+			new MessageDao().update(connection, message);
+			commit(connection);
 		} catch (RuntimeException e) {
 			rollback(connection);
 			log.log(Level.SEVERE, new Object() {
