@@ -166,7 +166,7 @@ public class MessageDao {
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("UPDATE messages SET ");
-			sql.append("    text = ?, ");
+			sql.append("    text = ? ");
 			sql.append("WHERE id = ?");
 
 			ps = connection.prepareStatement(sql.toString());

@@ -32,6 +32,12 @@ public class EditServlet  extends HttpServlet{
 				}.getClass().getEnclosingMethod().getName());
 
 		String messageId = request.getParameter("id");
+
+		if(!messageId.matches(("^[0-9]+$"))) {
+			request.getRequestDispatcher("./").forward(request,response);
+
+		}
+
 		Message message =new MessageService().messageSelect(messageId);
 
 		request.setAttribute("message", message);
@@ -43,6 +49,8 @@ public class EditServlet  extends HttpServlet{
 
 //		HttpSession session = request.getSession();
 
+//		List<String> errorMessages = new ArrayList<String>();
+
 		Message message = new Message();
 		message.setId(Integer.parseInt(request.getParameter("id")));
 		message.setText(request.getParameter("text"));
@@ -53,16 +61,4 @@ public class EditServlet  extends HttpServlet{
 //		session.setAttribute("loginUser", message);
 		response.sendRedirect("./");
 	}
-//	private Message getMessage(HttpServletRequest request) throws IOException, ServletException {
-//
-//		log.info(new Object() {
-//		}.getClass().getEnclosingClass().getName() +
-//				" : " + new Object() {
-//				}.getClass().getEnclosingMethod().getName());
-//
-//		Message message = new Message();
-//		message.setId(Integer.parseInt(request.getParameter("id")));
-//		message.setText(request.getParameter("text"));
-//		return message;
-//	}
 }
