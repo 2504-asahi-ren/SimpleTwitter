@@ -72,15 +72,13 @@ public class MessageDao {
 	public void insert(Connection connection, Integer id) {
 
 		log.info(new Object() {
-		}.getClass().getEnclosingClass().getName() +
-				" : " + new Object() {
+		}.getClass().getEnclosingClass().getName() +" : " + new Object() {
 				}.getClass().getEnclosingMethod().getName());
 
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("DELETE FROM messages WHERE id = ?");
-
 
 			ps = connection.prepareStatement(sql.toString());
 
@@ -122,7 +120,13 @@ public class MessageDao {
 			ResultSet rs = ps.executeQuery();
 
 			List<Message> messages = toMessages(rs);
-			return messages.get(0);
+			if (messages.isEmpty()) {
+				return null;
+			} else if (2 <= messages.size()) {
+				throw new IllegalStateException("つぶやきが重複しています");
+			}else {
+				return messages.get(0);
+			}
 
 		} catch (SQLException e) {
 			log.log(Level.SEVERE, new Object() {

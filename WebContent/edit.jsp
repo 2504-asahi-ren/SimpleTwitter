@@ -10,10 +10,22 @@
 		<link href="./css/style.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
+		<c:if test="${ not empty errorMessages }">
+			<div class="errorMessages">
+				<ul>
+					<c:forEach items="${errorMessages}" var="errorMessage">
+						<li><c:out value="${errorMessage}" />
+					</c:forEach>
+				</ul>
+			</div>
+		</c:if>
+
 		<div class="form-area">
 			<form action="editMessage" method="post">
 				つぶやき<br />
+				<pre>
 				<textarea name="text" cols="100" rows="5" class="tweet-box"><c:out value="${message.text}" /></textarea>
+				</pre>
 				 <input name="id" value="${message.id}" id="id" type="hidden" />
 				<br /><input type="submit" value="更新">(140文字まで)
 				<a href="./">戻る</a>
