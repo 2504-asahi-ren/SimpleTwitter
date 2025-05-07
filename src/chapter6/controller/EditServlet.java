@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 
 import chapter6.beans.Message;
+import chapter6.beans.User;
 import chapter6.service.MessageService;
 
 @WebServlet(urlPatterns = { "/editMessage" })
@@ -37,16 +38,17 @@ public class EditServlet  extends HttpServlet{
 		List<String> errorMessages = new ArrayList<String>();
 
 		String messageId = request.getParameter("id");
-
-		if(!messageId.matches(("^[0-9]+$")) || messageId == null) {
+		//つぶやきの編集画面でIDがnullの時、数字以外の時にエラーを出す。
+		if(messageId == null || !messageId.matches("^[0-9]+$")) {
 			errorMessages.add("不正なパラメータが入力されました");
 			session.setAttribute("errorMessages",errorMessages);
 			request.getRequestDispatcher("./").forward(request,response);
 		}
 
 		Message message =new MessageService().messageSelect(messageId);
-
-		if(message == null) {
+		User user = (User)session.getAttribute("loginUser");
+		//つぶやきの編集画面で存在しないIDを入力したとき。
+		if(message.getUserId() != user.getId()){
 			errorMessages.add("不正なパラメータが入力されました");
 			session.setAttribute("errorMessages",errorMessages);
 			request.getRequestDispatcher("./").forward(request,response);
@@ -73,9 +75,9 @@ public class EditServlet  extends HttpServlet{
 		}
 
 		if (errorMessages.size() != 0) {
-		request.setAttribute("errorMessages",errorMessages);
-		session.setAttribute("message", message);
-		request.getRequestDispatcher("edit.jsp").forward(request,response);
+			request.setAttribute("errorMessages",errorMessages);
+			session.setAttribute("message", message);
+			request.getRequestDispatcher("edit.jsp").forward(request,response);
 		return;
 		}
 

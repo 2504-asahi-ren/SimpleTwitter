@@ -69,7 +69,7 @@ public class MessageDao {
 		}
 	}
 
-	public void insert(Connection connection, Integer id) {
+	public void delete(Connection connection, Integer id) {
 
 		log.info(new Object() {
 		}.getClass().getEnclosingClass().getName() +" : " + new Object() {
@@ -93,7 +93,7 @@ public class MessageDao {
 			close(ps);
 		}
 	}
-	public Message select(Connection connection, Integer id, int LIMIT_NUM) {
+	public Message select(Connection connection, int id, int LIMIT_NUM) {
 
 		log.info(new Object() {
 		}.getClass().getEnclosingClass().getName() +
@@ -108,8 +108,8 @@ public class MessageDao {
 			sql.append("   id , ");
 			sql.append("   user_id  , ");
 			sql.append("   text , ");
-			sql.append("    created_date, ");
-			sql.append("    updated_date ");
+			sql.append("   created_date, ");
+			sql.append("   updated_date ");
 			sql.append("FROM messages ");
 			sql.append("WHERE id = ? ");
 			sql.append("ORDER BY created_date DESC limit " + LIMIT_NUM);
@@ -171,6 +171,7 @@ public class MessageDao {
 			StringBuilder sql = new StringBuilder();
 			sql.append("UPDATE messages SET ");
 			sql.append("    text = ? ");
+			sql.append("   created_date, ");
 			sql.append("WHERE id = ?");
 
 			ps = connection.prepareStatement(sql.toString());

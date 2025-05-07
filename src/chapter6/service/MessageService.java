@@ -105,7 +105,7 @@ public class MessageService {
 		}
 	}
 
-	public void insert(String messageId) {
+	public void delete(String messageId) {
 
 		log.info(new Object() {
 		}.getClass().getEnclosingClass().getName() +
@@ -121,7 +121,7 @@ public class MessageService {
 		        id = Integer.parseInt(messageId);
 		    }
 
-			new MessageDao().insert(connection, id);
+			new MessageDao().delete(connection, id);
 			commit(connection);
 		} catch (RuntimeException e) {
 			rollback(connection);
@@ -151,17 +151,14 @@ public class MessageService {
 		try {
 			connection = getConnection();
 			/*
-			* idをnullで初期化
 			* ServletからmessageIdの値が渡ってきていたら
 			* 整数型に型変換し、idに代入
 			*/
-			Integer id = null;
-				id = Integer.parseInt(messageId);
+
+			int id = Integer.parseInt(messageId);
 
 			/*
 			* messageDao.selectに引数としてInteger型のidを追加
-			* idがnullだったら全件取得する
-			* idがnull以外だったら、その値に対応するユーザーIDの投稿を取得する
 			*/
 			Message messages = new MessageDao().select(connection, id, LIMIT_NUM);
 
