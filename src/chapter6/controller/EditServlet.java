@@ -47,8 +47,9 @@ public class EditServlet  extends HttpServlet{
 
 		Message message =new MessageService().messageSelect(messageId);
 		User user = (User)session.getAttribute("loginUser");
+
 		//つぶやきの編集画面で存在しないIDを入力したとき。
-		if(message.getUserId() != user.getId()){
+		if(message == null ||message.getUserId() != user.getId()){
 			errorMessages.add("不正なパラメータが入力されました");
 			session.setAttribute("errorMessages",errorMessages);
 			request.getRequestDispatcher("./").forward(request,response);
