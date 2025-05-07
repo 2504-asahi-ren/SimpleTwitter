@@ -116,10 +116,7 @@ public class MessageService {
 		try {
 			connection = getConnection();
 
-			Integer id = null;
-		    if(!StringUtils.isEmpty(messageId)) {
-		        id = Integer.parseInt(messageId);
-		    }
+			int id = Integer.parseInt(messageId);
 
 			new MessageDao().delete(connection, id);
 			commit(connection);
@@ -137,6 +134,7 @@ public class MessageService {
 			close(connection);
 		}
 	}
+
 	//EditServletからselectで参照
 	public Message messageSelect(String messageId) {
 
@@ -177,6 +175,7 @@ public class MessageService {
 			close(connection);
 		}
 	}
+
 	public void update(Message message) {
 
 		log.info(new Object() {

@@ -69,7 +69,7 @@ public class MessageDao {
 		}
 	}
 
-	public void delete(Connection connection, Integer id) {
+	public void delete(Connection connection, int id) {
 
 		log.info(new Object() {
 		}.getClass().getEnclosingClass().getName() +" : " + new Object() {
@@ -171,8 +171,8 @@ public class MessageDao {
 			StringBuilder sql = new StringBuilder();
 			sql.append("UPDATE messages SET ");
 			sql.append("    text = ?,");
-			sql.append("   updated_date = CURRENT_TIMESTAMP ");
-			sql.append("WHERE id = ?");
+			sql.append("	updated_date = CURRENT_TIMESTAMP ");
+			sql.append("	WHERE id = ?");
 
 			ps = connection.prepareStatement(sql.toString());
 

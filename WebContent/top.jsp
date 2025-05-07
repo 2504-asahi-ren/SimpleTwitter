@@ -98,6 +98,7 @@
 						</c:if>
 					</div>
 			<!--つぶやきの編集終了-->
+			<!-- つぶやきの返信 -->
 				</c:forEach>
 			</div>
 			<div class="copyright">Copyright(c)RenAsahi</div>
