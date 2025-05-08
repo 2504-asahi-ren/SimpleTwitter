@@ -99,6 +99,33 @@
 					</div>
 			<!--つぶやきの編集終了-->
 			<!-- つぶやきの返信 -->
+					<div class="form-area">
+						<c:if test="${loginUser.id == message.userId }">
+							<form action="comment" method="post">
+								返信<br />
+								<pre><textarea name="text" cols="100" rows="5" class="tweet-box"></textarea></pre>
+								<br /><input type="submit" value="返信">
+								<input name="id" value="${message.id}" id="id" type="hidden" />
+							</form>
+						</c:if>
+					</div>
+			<!-- つぶやきの返信終了 -->
+			<!-- つぶやきの返信の表示 -->
+					<div class="comment">
+						<c:forEach items="${comments}" var="comment">
+						<c:if test="${message.id == comment.messageId }">
+							<div class="comment">
+								<div class="account-name">
+									<span class="account"><c:out value="${comment.account}" /></span>
+									<span class="name"><c:out value="${comment.name}" /></span>
+								</div>
+								<div class="text"><c:out value="${comment.text}" /></div>
+								<div class="date"><fmt:formatDate value="${comment.createdDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
+							</div>
+						</c:if>
+						</c:forEach>
+					</div>
+			<!-- つぶやきの返信の表示終了 -->
 				</c:forEach>
 			</div>
 			<div class="copyright">Copyright(c)RenAsahi</div>

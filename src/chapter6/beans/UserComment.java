@@ -1,22 +1,19 @@
 package chapter6.beans;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class UserMessage implements Serializable {
-
+public class UserComment {
 	private int id;
 	private String account;
 	private String name;
 	private int userId;
+	private int messageId;
 	private String text;
 	private Date createdDate;
 
-	// getter/setterは省略されているので、自分で記述しましょう。
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -43,6 +40,14 @@ public class UserMessage implements Serializable {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public int getMessageId() {
+		return messageId;
+	}
+
+	public void setMessageId(int messageId) {
+		this.messageId = messageId;
 	}
 
 	public String getText() {
