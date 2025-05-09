@@ -53,7 +53,7 @@ public class UserCommentDao {
 			sql.append("FROM comments ");
 			sql.append("INNER JOIN users ");
 			sql.append("ON comments.user_id = users.id ");
-			sql.append("ORDER BY created_date DESC limit " + LIMIT_NUM);
+			sql.append("ORDER BY created_date ASC limit " + LIMIT_NUM);
 			//SQLを実体化
 			ps = connection.prepareStatement(sql.toString());
 			//SQLを実行する

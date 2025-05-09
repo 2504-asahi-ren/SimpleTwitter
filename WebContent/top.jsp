@@ -39,6 +39,11 @@
 					</div>
 				</div>
 			</c:if>
+			<div class="createDate">
+				<form action="./" method="get">
+					日付:<input type="date" name="start" value="年/月/日">～<input type="date" name="end" value="年/月/日"> <input type="submit" value="絞り込み">
+				</form>
+			</div>
 			<c:if test="${ not empty errorMessages }">
 				<div class="errorMessages">
 					<ul>

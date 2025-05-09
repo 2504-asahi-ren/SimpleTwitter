@@ -32,7 +32,7 @@ public class UserMessageDao {
 
 	}
 
-	public List<UserMessage> select(Connection connection, Integer id, int LIMIT_NUM) {
+	public List<UserMessage> select(Connection connection, Integer id, int LIMIT_NUM, String dateStart, String dateEnd) {
 
 		log.info(new Object() {
 		}.getClass().getEnclosingClass().getName() +
@@ -53,16 +53,21 @@ public class UserMessageDao {
 			sql.append("FROM messages ");
 			sql.append("INNER JOIN users ");
 			sql.append("ON messages.user_id = users.id ");
+			//つぶやきの絞り込み(日付を入力)
+			sql.append("WHERE messages.created_date BETWEEN ? AND ? ");
 			//nullじゃない時(リンクが踏まれたとき)　一部取得の時
 			if (id != null) {
-				sql.append("WHERE user_id = ? ");
+				sql.append("AND user_id = ? ");
 			}
 			sql.append("ORDER BY created_date DESC limit " + LIMIT_NUM);
 			//SQLを実体化
 			ps = connection.prepareStatement(sql.toString());
+			//時刻のデフォルト値を代入
+			ps.setString(1, dateStart);
+			ps.setString(2, dateEnd);
 			//nullじゃない時はバインド変数に値を入れる。
 			if (id != null) {
-				ps.setInt(1, id);
+				ps.setInt(3, id);
 			}
 			//SQLを実行する
 			ResultSet rs = ps.executeQuery();
