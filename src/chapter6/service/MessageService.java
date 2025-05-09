@@ -87,7 +87,7 @@ public class MessageService {
 			String dateStart;
 			String dateEnd;
 
-			if(start != null) {
+			if(!StringUtils.isBlank(start)) {
 				dateStart = start + " 00:00:00";
 			}else {
 				dateStart = "2020-01-01 00:00:00" ;
@@ -95,7 +95,7 @@ public class MessageService {
 			//現在日時を取得？
 			Date date = new Date();
 			SimpleDateFormat currentTime  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			if(end != null) {
+			if(!StringUtils.isBlank(end)) {
 				dateEnd = end + " 23:59:59";
 			}else {
 				dateEnd = currentTime.format(date);
