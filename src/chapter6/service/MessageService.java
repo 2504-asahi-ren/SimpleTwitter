@@ -92,11 +92,11 @@ public class MessageService {
 			}else {
 				dateStart = "2020-01-01 00:00:00" ;
 			}
-			//現在日時を取得
 
 			if(!StringUtils.isBlank(end)) {
 				dateEnd = end + " 23:59:59";
 			}else {
+				//現在日時を取得
 				Date date = new Date();
 				SimpleDateFormat currentTime  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				dateEnd = currentTime.format(date);
