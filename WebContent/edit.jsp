@@ -21,7 +21,7 @@
 		</c:if>
 
 		<div class="form-area">
-			<form action="editMessage" method="post">
+			<form action="edit" method="post">
 				つぶやき<br />
 				<pre>
 				<textarea name="text" cols="100" rows="5" class="tweet-box"><c:out value="${message.text}" /></textarea>

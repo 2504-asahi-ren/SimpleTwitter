@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
-import chapter6.beans.Message;
+import chapter6.beans.Comment;
 import chapter6.beans.User;
 import chapter6.service.CommentService;
 
@@ -42,7 +42,7 @@ public class CommentServlet extends HttpServlet {
 			return;
 		}
 
-		Message comment = new Message();
+		Comment comment = new Comment();
 		comment.setText(text);
 		comment.setId(id);
 

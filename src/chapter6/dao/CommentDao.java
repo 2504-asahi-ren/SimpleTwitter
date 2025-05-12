@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import chapter6.beans.Message;
+import chapter6.beans.Comment;
 import chapter6.exception.SQLRuntimeException;
 
 public class CommentDao {
@@ -18,7 +18,7 @@ public class CommentDao {
 	*/
 	Logger log = Logger.getLogger("twitter");
 
-	public void insert(Connection connection, Message comment) {
+	public void insert(Connection connection, Comment comment) {
 
 		log.info(new Object() {
 		}.getClass().getEnclosingClass().getName() +

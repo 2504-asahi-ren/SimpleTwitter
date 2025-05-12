@@ -18,7 +18,7 @@ import chapter6.beans.Message;
 import chapter6.beans.User;
 import chapter6.service.MessageService;
 
-@WebServlet(urlPatterns = { "/editMessage" })
+@WebServlet(urlPatterns = { "/edit" })
 
 public class EditServlet extends HttpServlet {
 	/**

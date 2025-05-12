@@ -41,7 +41,9 @@
 			</c:if>
 			<div class="createDate">
 				<form action="./" method="get">
-					日付:<input type="date" name="start" value="年/月/日">～<input type="date" name="end" value="年/月/日"> <input type="submit" value="絞り込み">
+					日付:<input type="date" name="start" value="${start}" >～
+						<input type="date" name="end" value="${end}">
+						<input type="submit" value="絞り込み">
 				</form>
 			</div>
 			<c:if test="${ not empty errorMessages }">
@@ -94,9 +96,9 @@
 					</div>
 			<!--つぶやきの削除終了-->
 			<!--つぶやきの編集-->
-					<div class="editMessage">
+					<div class="edit">
 						<c:if test="${loginUser.id == message.userId }">
-							<form action="editMessage" method="get">
+							<form action="edit" method="get">
 								<br /> <input type="submit" value="編集">
 								<input name="id" value="${message.id}" id="id" type="hidden" />
 							</form>
@@ -124,7 +126,7 @@
 									<span class="account"><c:out value="${comment.account}" /></span>
 									<span class="name"><c:out value="${comment.name}" /></span>
 								</div>
-								<div class="text"><c:out value="${comment.text}" /></div>
+								<div class="text"><pre><c:out value="${comment.text}" /></pre></div>
 								<div class="date"><fmt:formatDate value="${comment.createdDate}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 							</div>
 						</c:if>

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import chapter6.beans.Message;
+import chapter6.beans.Comment;
 import chapter6.beans.UserComment;
 import chapter6.dao.CommentDao;
 import chapter6.dao.UserCommentDao;
@@ -16,7 +16,7 @@ import chapter6.dao.UserCommentDao;
 public class CommentService {
 	Logger log = Logger.getLogger("twitter");
 
-	public void insert(Message comment) {
+	public void insert(Comment comment) {
 
 		log.info(new Object() {
 		}.getClass().getEnclosingClass().getName() +

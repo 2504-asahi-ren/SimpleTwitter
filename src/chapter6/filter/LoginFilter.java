@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter({"/editMessage","/setting"})
+import chapter6.beans.User;
+
+@WebFilter({"/edit","/setting"})
 public class LoginFilter implements  Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response,
@@ -23,7 +25,7 @@ public class LoginFilter implements  Filter {
 
 		//型変換(キャスト)してsessionに代入
 		HttpSession session = ((HttpServletRequest)request).getSession();
-		Object loginCheck = session.getAttribute("loginUser");
+		User loginCheck = (User)session.getAttribute("loginUser");
 		List<String> errorMessages = new ArrayList<String>();
 
 		if(loginCheck != null){
